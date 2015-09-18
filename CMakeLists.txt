@@ -6,6 +6,7 @@ roscpp
 rospy
 message_generation
 )
+find_package(cmake_modules REQUIRED)
 find_package(Eigen REQUIRED)
 
 add_message_files(
@@ -37,4 +38,5 @@ include_directories(
 
 add_library(dmp src/dmp.cpp src/fourier_approx.cpp src/radial_approx.cpp src/linear_approx.cpp)
 add_executable(dmp_server nodes/dmp_server.cpp)
+add_dependencies(dmp ${PROJECT_NAME}_gencpp)
 target_link_libraries(dmp_server dmp ${catkin_LIBRARIES} ${Eigen_LIBRARIES})
